@@ -44,6 +44,7 @@ export default function App() {
       contacts.name.toLowerCase().includes(normalizedFilter)
     );
   };
+
   const filteredNames = findByName();
   return (
     <div className={s.app}>
