@@ -11,4 +11,15 @@ const addContact = createAction("contact/add", (name, number) => ({
 
 const deleteContact = createAction("contact/delete");
 
-export { addContact, deleteContact };
+const findByName = createAction("contact/filtered");
+
+const changeFilter = createAction("filter/change");
+
+// const compairContacts = createAction("contact/compair", (e) => (
+//    !contacts ?? return;
+//      (contacts.some(({ name }) => name === e)) {
+//       return true;
+//     }
+// ))
+
+export { addContact, deleteContact, findByName, changeFilter };
