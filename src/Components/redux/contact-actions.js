@@ -15,9 +15,8 @@ const findByName = createAction("contact/filtered");
 
 const changeFilter = createAction("filter/change");
 
-// const compairContacts = createAction("contact/compair", (e) => (
-//    !contacts ?? return;
-//      (contacts.some(({ name }) => name === e)) {
+// const compairContacts = createAction("contact/compair", (name) => (
+//        (contacts.some(({ name }) => name === e)) {
 //       return true;
 //     }
 // ))

@@ -12,29 +12,26 @@ import {
   deleteContact,
   findByName,
 } from "./Components/redux/contact-actions";
-import { getContacts } from "./Components/redux/contact-selectors";
+import {
+  getContacts,
+  getValueFilter,
+} from "./Components/redux/contact-selectors";
 
 export default function App() {
-  console.log(getContacts);
-  // const [contacts, setContacts] = useLocalStorage("contacts", "");
-  const [filter, setFilter] = useState("");
-
   const contacts = useSelector(getContacts);
+  const filterStore = useSelector(getValueFilter);
+
+  console.log("c", contacts);
+  console.log("f", filterStore);
 
   const dispatch = useDispatch();
 
   const onDeleteContact = (id) => dispatch(deleteContact(id));
+  const findedByName = (name) => dispatch(findByName(name));
+  const onChangeFilter = (e) => dispatch(changeFilter(e));
 
-  // const changeFilter = (e) => {
-  //   setFilter(e.currentTarget.value);
-  //   console.log(findByName());
-  // };
-
-  // const deleteContact = (contactId) => {
-  //   return setContacts(
-  //     contacts.filter((contacts) => contacts.id !== contactId)
-  //   );
-  // };
+  // console.log(findedByName(filterStore));
+  const fContacts = findedByName(filterStore);
 
   function compairContacts(e) {
     if (!contacts) return;
@@ -43,40 +40,51 @@ export default function App() {
     }
   }
 
-  // const addContact = (name, number) => {
-  //   const newContact = {
-  //     id: shortid.generate(),
-  //     name: name,
-  //     number: number,
-  //   };
-  //   setContacts((prevState) => [newContact, ...prevState]);
-  // };
-
-  // const findByName = () => {
-  //   const normalizedFilter = filter.toLowerCase();
-
-  //   return contacts.filter((contacts) =>
-  //     contacts.name.toLowerCase().includes(normalizedFilter)
-  //   );
-  // };
-
-  // const filteredNames = findByName();
-
   return (
     <div className={s.app}>
       <ContactForm
-        addContact={(e, w) =>
-          dispatch(addContact(e.targer.value, w.target.value))
-        }
+        addContact={(name, number) => dispatch(addContact(name, number))}
         compairContacts={compairContacts}
       />
       <h2>Contacts</h2>
-      <Filter onChange={(e) => dispatch(changeFilter(e.targer.value))} />
+      <Filter onChange={onChangeFilter} />
       <ContactList
-        contacts={contacts}
-        deleteContact={() => dispatch(onDeleteContact)}
-        filtreredContacts={dispatch(findByName())}
+        deleteContact={(id) => dispatch(onDeleteContact(id))}
+        filteredContacts={fContacts}
       />
     </div>
   );
 }
+
+// const [contacts, setContacts] = useLocalStorage("contacts", "");
+// const [filter, setFilter] = useState("");
+
+// const changeFilter = (e) => {
+//   setFilter(e.currentTarget.value);
+//   console.log(findByName());
+// };
+
+// const deleteContact = (contactId) => {
+//   return setContacts(
+//     contacts.filter((contacts) => contacts.id !== contactId)
+//   );
+// };
+
+// const addContact = (name, number) => {
+//   const newContact = {
+//     id: shortid.generate(),
+//     name: name,
+//     number: number,
+//   };
+//   setContacts((prevState) => [newContact, ...prevState]);
+// };
+
+// const findByName = () => {
+//   const normalizedFilter = filter.toLowerCase();
+
+//   return contacts.filter((contacts) =>
+//     contacts.name.toLowerCase().includes(normalizedFilter)
+//   );
+// };
+
+// const filteredNames = findByName();

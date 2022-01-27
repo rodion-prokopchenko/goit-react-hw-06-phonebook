@@ -3,12 +3,12 @@ import propTypes from "prop-types";
 import shortid from "shortid";
 import s from "./ContactList.module.css";
 
-export default function ContactList({ filtreredContacts, deleteContact }) {
+export default function ContactList({ filteredContacts, deleteContact }) {
   return (
     <>
       <ul className={s.contactList}>
-        {filtreredContacts
-          ? filtreredContacts.map((contacts) => (
+        {filteredContacts
+          ? filteredContacts.map((contacts) => (
               <li
                 className={s.contactList__item}
                 key={shortid.generate()}
