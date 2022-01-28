@@ -1,8 +1,6 @@
 import react, { useState, useEffect } from "react";
-import propTypes from "prop-types";
 import shortid from "shortid";
 import s from "./ContactForm.module.css";
-import { useDispatch } from "react-redux";
 
 export default function ContactForm({ addContact, compairContacts }) {
   const [name, setName] = useState("");
@@ -30,6 +28,7 @@ export default function ContactForm({ addContact, compairContacts }) {
     if (compairContacts(name)) {
       return alert(`${name} is already in contacts`);
     }
+
     addContact(name, number);
     reset();
   };
